@@ -8,10 +8,11 @@ import dayjs from "dayjs"
 
 
 export default function ProfilesStudents() {
+    const url = process.env.REACT_APP_BD
     const [list,setList] = useState(0)
     const params = useParams()
     useEffect(() => {
-		const requisicao = axios.get(`http://localhost:5000/studentsById/${params.id}`);
+		const requisicao = axios.get(`${url}/studentsById/${params.id}`);
 
 		requisicao.then(response => {
 			setList(response.data);

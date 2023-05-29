@@ -4,11 +4,12 @@ import Bot from "./components/Bot"
 import { useState } from "react"
 import axios from "axios"
 export default function SignupStudents() {
+    const url = process.env.REACT_APP_BD
     const [data, setData] = useState({name:"",cpf:"",email:"",image:"",classId:""})     
     console.log(data)
     function register(event){
         event.preventDefault();
-        const requisicao = axios.post("http://localhost:5000/signUp",data)
+        const requisicao = axios.post(`${url}/signUp`,data)
 		requisicao.then(() => alert("Aluno cadastrado"))
         requisicao.catch((err) => alert(err.message)) 
         setData({name:"",cpf:"",email:"",image:"",classId:""})

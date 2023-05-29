@@ -6,10 +6,11 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function StudentsList() {
+    const url = process.env.REACT_APP_BD
     const [list,setList] = useState(0)
     const navigate = useNavigate();
     function classes(value){
-        const requisicao = axios.get(`http://localhost:5000/students/${value}`)
+        const requisicao = axios.get(`${url}/students/${value}`)
 		requisicao.then(function (response) {
             setList(response.data)
           })

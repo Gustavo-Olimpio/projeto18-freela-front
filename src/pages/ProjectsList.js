@@ -6,6 +6,7 @@ import axios from "axios"
 import { FcSearch } from "react-icons/fc"
 
 export default function ProjectsList() {
+    const url = process.env.REACT_APP_BD
     const [classes, setClasses] = useState(0)
     const [projects, setProjects] = useState(0)
     const [list, setList] = useState(0)
@@ -14,7 +15,7 @@ export default function ProjectsList() {
 
     function search() {
         if (classes !== 0 && projects !== 0) {
-            const requisicao = axios.get(`http://localhost:5000/students/${classes}/${projects}`);
+            const requisicao = axios.get(`${url}/students/${classes}/${projects}`);
             requisicao.then(response => {
                 if (!response.data[0]) {
                     setList(0);
@@ -34,7 +35,7 @@ export default function ProjectsList() {
         console.log(data)
         console.log(grade)
         if (grade===0) return alert("Selecione a nota do aluno")
-        const requisicao = axios.put(`http://localhost:5000/grade/${id}`,{grade:grade});
+        const requisicao = axios.put(`${url}/grade/${id}`,{grade:grade});
         requisicao.then(() => {
             alert("Nota cadastrada")
             setData(0)

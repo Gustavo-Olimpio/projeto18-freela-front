@@ -5,10 +5,11 @@ import axios from "axios"
 import { useState } from "react"
 
 export default function ProjectsDelivery() {
+    const url = process.env.REACT_APP_BD
     const [data, setData] = useState({classId:"",studentId:"",projectId:"",link:""})     
     const [list,setList] = useState(0)
     function searchStudents(value){
-        const requisicao = axios.get(`http://localhost:5000/students/${value}`)
+        const requisicao = axios.get(`${url}/students/${value}`)
 		requisicao.then(function (response) {
             setList(response.data)
           })
@@ -19,7 +20,7 @@ export default function ProjectsDelivery() {
     }
     function register(event){
         event.preventDefault();
-        const requisicao = axios.post("http://localhost:5000/delivery",data)
+        const requisicao = axios.post(`${url}/delivery`,data)
 		requisicao.then(() => alert("Projeto entregue"))
         requisicao.catch((err) => alert(err.message))
         setData({classId:"",studentId:"",projectId:"",link:""}) 
